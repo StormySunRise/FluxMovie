@@ -1,0 +1,18 @@
+
+<div class="generos-container">
+    <div
+      *ngFor="let genero of listGeneros"
+      class="genero-card"
+      [ngClass]="{ 'selected': isGeneroSelected(genero.genreId) }"
+      (click)="toggleGeneroSelection(genero.genreId)"
+    >
+      <img [src]="genero.imageUrl" alt="{{ genero.genreName }}" class="genero-image" />
+      <p>{{ genero.genreName }}</p>
+    </div>
+  </div>
+  
+  <div class="button-container pb-5">
+    <button class="btn-saltar" (click)="redirectToRoute()">Saltar</button>
+    <button class="btn-guardar" (click)="guardar()">Guardar</button>
+  </div>
+  

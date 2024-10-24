@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div class="min-h-screen flex flex-col items-center justify-center relative bg-cover bg-center" style="background-image: url('https://www.islabit.com/wp-content/uploads/2020/12/cintas-online.jpg');">
+  
+  <div class="relative z-10 w-full max-w-md bg-gray-900 p-8 rounded-lg shadow-lg text-white">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-500">Iniciar sesión</h1>
+    <form (ngSubmit)="login()">
+      <div class="mb-4">
+        <label class="block text-sm mb-2" for="email">Correo electrónico</label>
+        <input
+          class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-blue-500"
+          type="email" id="email" [(ngModel)]="email" name="email" placeholder="Introduce tu correo" required />
+      </div>
+      <div class="mb-6">
+        <label class="block text-sm mb-2" for="password">Contraseña</label>
+        <input
+          class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-blue-500"
+          type="password" id="password" [(ngModel)]="password" name="password" placeholder="Introduce tu contraseña" required />
+      </div>
+      <button type="submit" class="w-full p-3 bg-blue-600 rounded hover:bg-blue-700 transition">Iniciar sesión</button>
+    </form>
+  </div>
+</div>

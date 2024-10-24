@@ -1,0 +1,67 @@
+
+<app-navbar></app-navbar>
+
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-800 relative">
+
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="https://www.islabit.com/wp-content/uploads/2020/12/cintas-online.jpg" 
+      alt="Promocional" 
+      class="w-full h-full object-cover brightness-50" />
+  </div>
+
+
+  <div class="w-full max-w-md bg-gray-900 p-8 rounded-lg shadow-lg text-white z-10">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-500">Regístrate</h1>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-4">
+        <label class="block text-sm mb-2" for="name">Nombre completo</label>
+        <input
+          class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-blue-500"
+          type="text"
+          id="name"
+          formControlName="username"
+          placeholder="Introduce tu nombre completo" />
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm mb-2" for="email">Correo electrónico</label>
+        <input
+          class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-blue-500"
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Introduce tu correo" />
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm mb-2" for="password">Contraseña</label>
+        <input
+          class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-blue-500"
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Crea una contraseña" />
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm mb-2" for="confirmPassword">Confirmar contraseña</label>
+        <input
+          class="w-full p-3 rounded bg-gray-700 border border-gray-600 focus:border-blue-500"
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirma tu contraseña" />
+      </div>
+
+
+      <button
+        class="w-full p-3 bg-blue-600 rounded shadow-lg hover:bg-blue-700 transition"
+        type="submit"
+        [disabled]="registrationForm.invalid">
+        Registrarse
+      </button>
+    </form>
+  </div>
+</div>

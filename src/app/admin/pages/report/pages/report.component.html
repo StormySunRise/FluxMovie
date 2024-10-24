@@ -1,0 +1,11 @@
+<h2>Report</h2>
+
+<h3>Registered Users</h3>
+<ul>
+  <li *ngFor="let user of users">{{ user.name }} - {{ user.preferences.join(', ') }}</li>
+</ul>
+
+<h3>Registered Movies</h3>
+<ul>
+  <li *ngFor="let movie of movies">{{ movie.title }} - {{ movie.genre }}</li>
+</ul>

@@ -1,0 +1,15 @@
+<div class="bg-gray-900">
+  <div mat-dialog-content class="text-center p-6 min-w-[400px] min-h-[200px] rounded-lg bg-gray-900 text-white">
+    <div class="flex justify-center mb-4">
+      <mat-icon *ngIf="data.isSuccess" class="text-green-500 text-5xl">check_circle</mat-icon>
+      <mat-icon *ngIf="!data.isSuccess" class="text-red-500 text-5xl">cancel</mat-icon>
+    </div>
+  
+    <h2 class="mt-2 text-xl font-semibold">{{ data.isSuccess ? 'Registro exitoso' : 'Error en el registro' }}</h2>
+    <p class="text-lg mt-2">{{ data.message }}</p>
+  </div>
+  
+  <div mat-dialog-actions class="flex justify-center mt-6 bg-gray-900">
+    <button mat-raised-button color="primary" (click)="redirectToRoute()" class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 mb-7">Aceptar</button>
+  </div>
+</div>
