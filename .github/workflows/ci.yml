@@ -1,8 +1,8 @@
-name: Angular CI/CD
+name: Angular CI/CD Pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build-and-deploy:
@@ -17,16 +17,18 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: Install dependencies
+      - name: Install dependencies (with legacy peer deps)
         run: npm install --legacy-peer-deps
 
-      - name: Build Angular
+      - name: Build Angular production
         run: npm run build -- --configuration=production
 
-      - name: Verify build
+      - name: Verify build files
         run: |
-          if [ ! -f "dist/index.html" ]; then
-            echo "❌ Error: Build fallido (no se generó index.html)"
+          echo "Contenido de dist/:"
+          ls -R dist/
+          if [ ! -f "dist/front-movie-app/index.html" ]; then
+            echo "❌ Error: Build fallido - no se encontró index.html"
             exit 1
           fi
 
@@ -35,3 +37,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/front-movie-app
+          keep_files: false
+          enable_jekyll: false
