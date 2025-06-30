@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: Install dependencies (with legacy peer deps)
+      - name: Install dependencies
         run: npm install --legacy-peer-deps
 
       - name: Build Angular production
@@ -25,10 +25,11 @@ jobs:
 
       - name: Verify build files
         run: |
-          echo "Contenido de dist/:"
+          echo "Estructura de carpetas en dist/:"
           ls -R dist/
-          if [ ! -f "dist/front-movie-app/index.html" ]; then
-            echo "❌ Error: Build fallido - no se encontró index.html"
+          if [ ! -f "dist/front-movie-app/browser/index.html" ]; then
+            echo "❌ Error: El archivo index.html no se encontró en dist/front-movie-app/browser/"
+            echo "Posible solución: Revisa angular.json y ajusta el outputPath o el builder"
             exit 1
           fi
 
@@ -36,6 +37,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/front-movie-app
+          publish_dir: ./dist/front-movie-app/browser 
           keep_files: false
           enable_jekyll: false
