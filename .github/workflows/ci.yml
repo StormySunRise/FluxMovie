@@ -4,6 +4,9 @@ on:
   push:
     branches: [master]
 
+permissions:
+  contents: write 
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -11,6 +14,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -20,16 +25,14 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build Angular production
+      - name: Build Angular
         run: npm run build -- --configuration=production
 
-      - name: Verify build files
+      - name: Verify build
         run: |
-          echo "Estructura de carpetas en dist/:"
-          ls -R dist/
-          if [ ! -f "dist/front-movie-app/browser/index.html" ]; then
-            echo "❌ Error: El archivo index.html no se encontró en dist/front-movie-app/browser/"
-            echo "Posible solución: Revisa angular.json y ajusta el outputPath o el builder"
+          if [ ! -d "dist/front-movie-app/browser" ]; then
+            echo "❌ Error: No se encontró el directorio de build"
+            ls -R dist/
             exit 1
           fi
 
@@ -37,6 +40,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/front-movie-app/browser 
+          publish_dir: ./dist/front-movie-app/browser
           keep_files: false
           enable_jekyll: false
+          user_name: 'github-actions'
+          user_email: 'github-actions@users.noreply.github.com'
