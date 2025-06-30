@@ -1,0 +1,37 @@
+name: Angular CI/CD
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular
+        run: npm run build -- --configuration=production
+
+      - name: Verify build
+        run: |
+          if [ ! -f "dist/index.html" ]; then
+            echo "❌ Error: Build fallido (no se generó index.html)"
+            exit 1
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/front-movie-app
